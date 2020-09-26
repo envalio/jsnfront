@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 
-const api = 'http://127.0.0.1:3030/heroes/'
+const api = '/heroes/'
 
 function List() {
     const [data, setData] = useState(null)
-    const [testList] = useState([])
 
     useEffect(() => {
             fetch(`${api}`)
@@ -13,18 +12,33 @@ function List() {
             .catch(error => console.error(error))
         
     }, [])
-    console.log({data});
+
+
+    if(!data) {
+      return (
+        <div>Loading...</div>
+      )
+    }
+
+    if(!data.length) {
+      return (
+        <div>No result!</div>
+      )
+    }
+
   return (
     <ul>
-        {data?.length}
-        {testList.map(el => //list mapping example
-        <li key={el.id}>
+        {data.length}
+        {data.map(el => (
+          <li key={el.id}>
             <p>Nick name: {el.nickname}</p>
-            <p>Real name: {el.realnage}</p>
+            {/* <p>Real name: {el.realnage}</p>
             <p>Description: {el.description}</p>
             <p>Super power: {el.superpower}</p>
-            <p>Catch phrase: {el.catchphrase}</p>
-        </li>)}
+            <p>Catch phrase: {el.catchphrase}</p> */}
+          </li>
+        )
+        )}
     </ul>
   );
 }
