@@ -16,8 +16,13 @@ const App = () => {
   }, [])
 
   const fetchHeroesData = () => {
-    fetch(`${process.env.REACT_APP_URL}`)
-      .then(res => res.json())
+    fetch(`${process.env.REACT_APP_URL}`,
+    { 
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    }})
+      .then(res => res.json(heroesData))
       .then(res => setHeroesData(res))
       .catch(error => console.error(error))
   }

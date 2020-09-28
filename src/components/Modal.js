@@ -64,11 +64,19 @@ const Modal = ({ switchModal, heroData, state, fetchHeroesData }) => {
 
       if (heroData) {
         await fetch(`${process.env.REACT_APP_URL}/${heroData._id}`, {
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+          },
           method: "PUT",
           body: JSON.stringify(body)
         })
       } else {
         await fetch(`${process.env.REACT_APP_URL}`, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
           method: "POST",
           body: JSON.stringify(body)
         })
