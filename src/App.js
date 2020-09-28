@@ -24,7 +24,7 @@ const App = () => {
     }})
       .then(res => res.json(heroesData))
       .then(res => setHeroesData(res))
-      .catch(error => console.error(error))
+      .catch(err => console.error(err))
   }
 
   return (

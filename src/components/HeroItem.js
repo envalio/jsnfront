@@ -4,14 +4,14 @@ import Modal from './Modal';
 const HeroItem = ({ heroData, fetchHeroesData }) => {
 
   const [isInfoOpened, switchInfo] = useState(false);
-  const [modalState, setModalState] = useState("view");
+  const [modalState, setModalState] = useState("view"); //View or edit. And view defualt
   
   const openViewHero = () => {
     setModalState("view");
     switchInfo(true);
   }
 
-  const handleEditHero = () => {
+  const openEditHero = () => {
     setModalState("edit");
     switchInfo(true);
   }
@@ -21,16 +21,16 @@ const HeroItem = ({ heroData, fetchHeroesData }) => {
       method: 'DELETE'
     })
 
-    await fetchHeroesData();
+    await fetchHeroesData(); // refetching
   }
 
   return (
-    <li style={{ display: 'flex' }}>
+    <li className="HeroItemLi">
       <p onClick={openViewHero}>
         Nick name: {heroData.nickname}
       </p>
 
-      <button onClick={handleEditHero}>Edit</button>
+      <button onClick={openEditHero}>Edit</button>
       <button onClick={handleDeleteHero}>Delete</button>
 
       {isInfoOpened && (

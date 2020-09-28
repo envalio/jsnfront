@@ -90,6 +90,10 @@ const Modal = ({ switchModal, heroData, state, fetchHeroesData }) => {
       switchModal(false)
     }
 
+    const handleModalBodyClick = (e) => {
+      e.stopPropagation();
+    }
+
     const renderButtons = () => (
       <>
         <button type="button" 
@@ -108,28 +112,12 @@ const Modal = ({ switchModal, heroData, state, fetchHeroesData }) => {
     return (
       <div
         onClick={handleClose}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          background: "rgba(0, 0, 0, 0.15)"
-        }}
+        className="ModalWindowBackground"
       >
-        <div
-          onClick={e => e.stopPropagation()}
-          className="modal"
-          style={{
-            position: "absolute",
-            background: "#fff",
-            top: 25,
-            left: "10%",
-            right: "10%",
-            padding: 15,
-            border: "2px solid #444"
-          }}
-        >
+      <div
+        onClick={handleModalBodyClick}
+        className="ModalWindowBody"
+      >
           {state === "view" ? renderViewHeroData() : renderEditHeroData()}
           {state === "edit" && renderButtons()}
         </div>
